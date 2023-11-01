@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "numberick",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/oscbyspro/Numberick",
+      "state" : {
+        "revision" : "d3b894da495e8660555051b614d8ccc44725f553",
+        "version" : "0.15.0"
+      }
+    }
+  ],
+  "version" : 2
+}

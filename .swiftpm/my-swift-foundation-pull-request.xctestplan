@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "5EFC7032-2531-49E1-8450-AB806749DCBC",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PullRequestTests",
+        "name" : "PullRequestTests"
+      }
+    }
+  ],
+  "version" : 1
+}
