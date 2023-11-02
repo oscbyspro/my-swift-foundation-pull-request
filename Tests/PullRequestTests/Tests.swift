@@ -187,8 +187,8 @@ final class Tests: XCTestCase {
         var y = blackHoleIdentity(Int.max)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.description)
-            blackHole(y.description)
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
@@ -200,8 +200,8 @@ final class Tests: XCTestCase {
         var y = blackHoleIdentity(UInt.max / 2 + 0)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.description)
-            blackHole(y.description)
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
@@ -213,8 +213,8 @@ final class Tests: XCTestCase {
         var y = blackHoleIdentity(Int256.max)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.description)
-            blackHole(y.description)
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
@@ -226,8 +226,64 @@ final class Tests: XCTestCase {
         var y = blackHoleIdentity(UInt256.max / 2 + 0)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.description)
-            blackHole(y.description)
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    //=------------------------------------------------------------------------=
+    // MARK: Tests x Stdlib
+    //=------------------------------------------------------------------------=
+    
+    func test_Int_Stdlib() {
+        var x = blackHoleIdentity(someSwiftFixedWidthInteger(Int.min))
+        var y = blackHoleIdentity(someSwiftFixedWidthInteger(Int.max))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt_Stdlib() {
+        var x = blackHoleIdentity(someSwiftFixedWidthInteger(UInt.max / 2 + 1))
+        var y = blackHoleIdentity(someSwiftFixedWidthInteger(UInt.max / 2 + 0))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int256_Stdlib() {
+        var x = blackHoleIdentity(someSwiftFixedWidthInteger(Int256.min))
+        var y = blackHoleIdentity(someSwiftFixedWidthInteger(Int256.max))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt256_Stdlib() {
+        var x = blackHoleIdentity(someSwiftFixedWidthInteger(UInt256.max / 2 + 1))
+        var y = blackHoleIdentity(someSwiftFixedWidthInteger(UInt256.max / 2 + 0))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)

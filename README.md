@@ -17,12 +17,12 @@ I have published a small [package][PRP] with some [benchmarks][PRT].
 
 #### The results on my machine in seconds:
 
-|         | v0     | v1    | v2    | [Numberick][NBK] |
-|---------|-------:|------:|------:|-----------------:|
-| Int     |  1.755 | 0.314 | 0.188 | 0.172            |
-| UInt    |  0.261 | 0.302 | 0.181 | 0.166            |
-| Int256  | 42.807 | 0.875 | 0.443 | 0.430            |
-| UInt256 | 34.844 | 0.815 | 0.428 | 0.426            |
+|         | v0     | v1    | v2    | [Numberick][NBK] | Stdlib  |
+|--------:|-------:|------:|------:|-----------------:|--------:|
+| Int     |  1.755 | 0.314 | 0.188 | 0.172            |   0.172 |
+| UInt    |  0.261 | 0.302 | 0.181 | 0.166            |   0.167 |
+| Int256  | 42.807 | 0.875 | 0.443 | 0.430            | 102.573 |
+| UInt256 | 34.844 | 0.815 | 0.428 | 0.426            | 100.598 |
 
 [PRP]: https://github.com/oscbyspro/my-swift-foundation-pull-request
 [PRT]: https://github.com/oscbyspro/my-swift-foundation-pull-request/blob/main/Tests/PullRequestTests/Tests.swift
