@@ -155,7 +155,7 @@ private func formTwosComplementForBinaryInteger002(words: UnsafeMutableBufferPoi
 ///
 private func maxDecimalExponentAndPowerForUnsignedIntegerWord002() -> (exponent: Int, power: UInt) {
     var exponent = 1 as  Int
-    var power = 0020 as UInt
+    var power = 0010 as UInt
     
     while true {
         let next = power.multipliedReportingOverflow(by: 10)
