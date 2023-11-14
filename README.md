@@ -15,14 +15,16 @@ I have published a small [package][PRP] with some [benchmarks][PRT].
 - `v1`: the `new` version
 - `v2`: the `new` version + 2x `@inlinable` + 1x `@usableFromInline`
 
-#### The results on my machine in seconds:
+#### The results on my MacBook Pro (13-inch, M1, 2020), Xcode 15.0.1, in seconds:
 
-|         | v0     | v1    | v2    | [Numberick][NBK] | Stdlib  |
-|--------:|-------:|------:|------:|-----------------:|--------:|
-| Int     |  1.755 | 0.314 | 0.188 | 0.172            |   0.172 |
-| UInt    |  0.261 | 0.302 | 0.181 | 0.166            |   0.167 |
-| Int256  | 42.807 | 0.875 | 0.443 | 0.430            | 102.573 |
-| UInt256 | 34.844 | 0.815 | 0.428 | 0.426            | 100.598 |
+|          | v0     | v1    | v2    | [Numberick][NBK] | Stdlib  |
+|---------:|-------:|------:|------:|-----------------:|--------:|
+| Int      |  1.528 | 0.271 | 0.169 | 0.167            |   0.169 |
+| UInt     |  0.226 | 0.257 | 0.161 | 0.163            |   0.164 |
+| Int256   | 36.575 | 0.772 | 0.423 | 0.422            |  86.736 |
+| UInt256  | 29.418 | 0.728 | 0.408 | 0.419            |  85.649 |
+| Int(±1)  |  1.408 | 0.255 | 0.156 | 0.061            |   0.062 |
+| UInt(1)  |  0.208 | 0.242 | 0.146 | 0.062            |   0.062 |
 
 [PRP]: https://github.com/oscbyspro/my-swift-foundation-pull-request
 [PRT]: https://github.com/oscbyspro/my-swift-foundation-pull-request/blob/main/Tests/PullRequestTests/Tests.swift

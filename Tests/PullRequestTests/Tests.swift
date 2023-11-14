@@ -14,6 +14,32 @@ final class Tests: XCTestCase {
     // MARK: Tests x Foundation x 000
     //=------------------------------------------------------------------------=
     
+    func test_PlusMinus1_Int_Foundation_000() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000)
+            blackHole(y.numericStringRepresentation000)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Foundation_000() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000)
+            blackHole(y.numericStringRepresentation000)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
     func test_Int_Foundation_000() {
         var x = blackHoleIdentity(Int.min)
         var y = blackHoleIdentity(Int.max)
@@ -69,6 +95,32 @@ final class Tests: XCTestCase {
     //=------------------------------------------------------------------------=
     // MARK: Tests x Foundation x 001
     //=------------------------------------------------------------------------=
+    
+    func test_PlusMinus1_Int_Foundation_001() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation001)
+            blackHole(y.numericStringRepresentation001)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Foundation_001() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation001)
+            blackHole(y.numericStringRepresentation001)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
     
     func test_Int_Foundation_001() {
         var x = blackHoleIdentity(Int.min)
@@ -126,6 +178,32 @@ final class Tests: XCTestCase {
     // MARK: Tests x Foundation x 002
     //=------------------------------------------------------------------------=
     
+    func test_PlusMinus1_Int_Foundation_002() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Foundation_002() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
     func test_Int_Foundation_002() {
         var x = blackHoleIdentity(Int.min)
         var y = blackHoleIdentity(Int.max)
@@ -181,6 +259,32 @@ final class Tests: XCTestCase {
     //=------------------------------------------------------------------------=
     // MARK: Tests x Numberick
     //=------------------------------------------------------------------------=
+        
+    func test_PlusMinus1_Int_Numberick() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Numberick() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
     
     func test_Int_Numberick() {
         var x = blackHoleIdentity(Int.min)
@@ -237,6 +341,32 @@ final class Tests: XCTestCase {
     //=------------------------------------------------------------------------=
     // MARK: Tests x Stdlib
     //=------------------------------------------------------------------------=
+    
+    func test_PlusMinus1_Int_Stdlib() {
+        var x = blackHoleIdentity(someSwiftFixedWidthInteger(Int(-1)))
+        var y = blackHoleIdentity(someSwiftFixedWidthInteger(Int( 1)))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Stdlib() {
+        var x = blackHoleIdentity(someSwiftFixedWidthInteger(UInt(1)))
+        var y = blackHoleIdentity(someSwiftFixedWidthInteger(UInt(1)))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(String(x, radix: 10))
+            blackHole(String(y, radix: 10))
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
     
     func test_Int_Stdlib() {
         var x = blackHoleIdentity(someSwiftFixedWidthInteger(Int.min))
