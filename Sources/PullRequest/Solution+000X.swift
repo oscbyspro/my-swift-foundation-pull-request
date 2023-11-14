@@ -6,14 +6,14 @@ extension BinaryInteger {
     /// Formats `self` in "Numeric string" format (https://speleotrove.com/decimal/daconvs.html) which is the required input form for certain ICU functions (e.g. `unum_formatDecimal`).
     ///
     /// This produces output that (at time of writing) looks identical to the `description` for many `BinaryInteger` types, such as the built-in integer types.  However, the format of `description` is not specifically defined by `BinaryInteger` (or anywhere else, really), and as such cannot be relied upon.  Thus this purpose-built method, instead.
-    public var numericStringRepresentation000: ArraySlice<UInt8> {
+    @inlinable public var numericStringRepresentation000X: ArraySlice<UInt8> {
         // It might be worth moving this method into the Swift standard library one day, so that it can be used as the basis for the default `description` instead of duplicating that conversion process.  At least while `description`'s output happens to match this one's.
         //
         // This property's type is an ArraySlice rather than a straight ContiguousArray because it's computationally more expensive to size the array exactly right (whether by pre-calculating the required size more precisely, or by dynamically resizing it during execution of the iterative algorithm).  Since this is intended to only be a transient value, for the purposes of translating from BinaryInteger to the ICU libraries, this is the right compromise of runtime speed (CPU time) and memory efficiency (it's usually only off by a byte or two, if that).
 
         // Fast-path for values that fit into a UInt, as the conversion to a UInt should be virtually free if it's possible (it's essentially just self.words[0]) and there's a specialisation of this function for UInt that's faster.
         if let fastForm = UInt(exactly: self) {
-            return fastForm.numericStringRepresentation000
+            return fastForm.numericStringRepresentation000X
         }
 
         precondition(.zero != self, "Value of zero (for self) should have been handled by fast path, but wasn't.") // Zero isn't handled correctly in the algorithm below (no numbers will actually be emitted) because it's more work to do so, which is unnecessary as the fast path above should handle that case.
@@ -24,9 +24,9 @@ extension BinaryInteger {
         //
         // So we replace some of those expensive O(log2(bitWidth)) divides with simpler O(1) divides, by first dividing by the largest multiple of ten such that the remainder fits in a single machine word (UInt), and then using regular integer division CPU instructions to further divide that simple machine-word-sized remainder down into individual digits.
 
-        let (decimalDigitsPerWord, wordMagnitude) = Self.decimalDigitsAndMagnitudePerWord000()
+        let (decimalDigitsPerWord, wordMagnitude) = Self.decimalDigitsAndMagnitudePerWord000X()
         let negative = 0 > self
-        let maximumDigits = (Self.maximumDecimalDigitsForUnsigned000(bitWidth: self.magnitudeBitWidth000)
+        let maximumDigits = (Self.maximumDecimalDigitsForUnsigned000X(bitWidth: self.magnitudeBitWidth000X)
                              + (negative ? 1 : 0)) // Include room for "-" prefix if necessary.
         var actualDigits: Int = Int.min // Actually initialised inside the closure below, but the compiler mistakenly demands a default value anyway.
 
@@ -39,8 +39,8 @@ extension BinaryInteger {
                 precondition(.zero == remainder || (negative == (0 > remainder)), "Starting value \(tmp) is \(negative ? "negative" : "positive (or zero)") yet the remainder of division by \(wordMagnitude) is not: \(remainder).  quotientAndRemainder(dividingBy:) is not implemented correctly for \(type(of: self)) (it might be using F-division instead of T-division).") // It's an entirely understandable error for an implementor to use F-division for their integer quotient and remainder, but they're supposed to use T-division.  i.e. the quotient is supposed to be rounded towards zero rather than down (and that effects the modulus correspondingly, since either way the results must satisfy r = d ⨉ (r idiv i) + (r mod i)).  T-division is convenient because its remainder is neatly the value of interest to this algorithm, rather than being offset by the divisor if r is negative.  While it would be technically possible to assume F-division if the remainder's sign doesn't match, the incorrect implementation of quotientAndRemainder(dividingBy:) will probably still break other algorithms and so we shouldn't encourage it.
 
                 // By definition the remainder has to be a single word (since the divisor, `wordMagnitude`, fits in a single word), so we can avoid working on a BinaryInteger generically and just use the first word directly, which is concretely UInt.
-                assert(remainder.magnitudeBitWidth000 <= Words.Element.bitWidth,
-                       "The remainder of dividing \(tmp) by \(wordMagnitude), \(remainder), should fit into a single word, yet it does not (its magnitude bit width is \(remainder.magnitudeBitWidth000) which is greater than the \(Words.Element.bitWidth) bits of Words.Element (\(Words.Element.self))).")
+                assert(remainder.magnitudeBitWidth000X <= Words.Element.bitWidth,
+                       "The remainder of dividing \(tmp) by \(wordMagnitude), \(remainder), should fit into a single word, yet it does not (its magnitude bit width is \(remainder.magnitudeBitWidth000X) which is greater than the \(Words.Element.bitWidth) bits of Words.Element (\(Words.Element.self))).")
                 var word = remainder.words.first ?? 0
 
                 if negative {
@@ -49,7 +49,7 @@ extension BinaryInteger {
                     word = ~word &+ 1
                 }
 
-                let digitsAdded = word.numericStringRepresentation000(intoEndOfBuffer: &buffer[...wordInsertionPoint])
+                let digitsAdded = word.numericStringRepresentation000X(intoEndOfBuffer: &buffer[...wordInsertionPoint])
 
                 if .zero != quotient { // Not on the last word, so need to fill in leading zeroes etc.
                     wordInsertionPoint -= decimalDigitsPerWord
@@ -87,7 +87,7 @@ extension BinaryInteger {
     
     /// - Parameter bitWidth: The bit width of interest.  Must be zero or positive.
     /// - Returns: The maximum number of decimal digits that an unsigned value of the given bit width may contain.
-    internal static func maximumDecimalDigitsForUnsigned000(bitWidth: Int) -> Int {
+    @inlinable static func maximumDecimalDigitsForUnsigned000X(bitWidth: Int) -> Int {
         guard 0 < bitWidth else { return 0 }
         guard 1 != bitWidth else { return 1 } // Algorithm below only works for bit widths of _two_ and above.
 
@@ -99,7 +99,7 @@ extension BinaryInteger {
     /// This is useful for determining how many bits are needed to store the magnitude of `self` (an unsigned integer) _without_ actually determining the magnitude (via the `magnitude` property) since that is relatively expensive (in memory if not also runtime, depending on the size and implementation of the underlying type).
     ///
     /// It is never less than one.
-    internal var magnitudeBitWidth000: Int {
+    @inlinable var magnitudeBitWidth000X: Int {
         // `BinaryInteger` does provide a `bitWidth` property which could be used to help with this, but for three things:
         //
         //   1. For `FixedWidthInteger`s it returns the fixed (maximum) size of the type, not the (minimum) size required to represent `self`.
@@ -152,8 +152,8 @@ extension BinaryInteger {
     /// Determines the magnitude (the largest decimal magnitude that fits in Word, e.g. 100 for UInt8) and "maximum" digits per word (e.g. two for UInt8).
     ///
     /// Note that 'maximum' in this case is context-specific to the `numericStringRepresentation` algorithm.  It is not necessarily the maximum digits required for _any_ Word, but rather any value of Word type which is less than the maximum decimal magnitude.  Typically this is one digit less.
-    internal // For unit test accessibility, otherwise would be fileprivate.
-    static func decimalDigitsAndMagnitudePerWord000() -> (digits: Int, magnitude: Self) {
+    @inlinable // For unit test accessibility, otherwise would be fileprivate.
+    static func decimalDigitsAndMagnitudePerWord000X() -> (digits: Int, magnitude: Self) {
         // This method cannot be defined statically because it depends on the types of both Self and Word.  The compiler can in principle fold this down to the resulting values at compile time - since it knows the concrete types for any given call site - and then just inline those into the caller.
 
         // First, a fast-path that works for any type (for `Self`) which can (essentially) represent a UInt (or larger).
@@ -198,7 +198,7 @@ extension UInt {
     ///
     /// - Parameter intoEndOfBuffer: The buffer to write into, which _must_ contain enough space for the result.  The formatted output is placed into the _end_ of this buffer ("right-aligned", if you will), though the output is numerically still left-to-right.  The contents of this buffer do not have to be pre-initialised.
     /// - Returns: How many entries (UInt8s) of the buffer were used.  Note that zero is a valid return value, as nothing is written to the buffer if `self` is zero (this may be odd but it's acceptable to `numericStringRepresentation` and it simplifies the overall implementation).
-    fileprivate func numericStringRepresentation000(intoEndOfBuffer buffer: inout Slice<UnsafeMutableBufferPointer<UInt8>>) -> Int {
+    @inlinable func numericStringRepresentation000X(intoEndOfBuffer buffer: inout Slice<UnsafeMutableBufferPointer<UInt8>>) -> Int {
         guard .zero != self else { return 0 } // Easier to special-case this here than deal with it below (annoying off-by-one potential errors).
 
         var insertionPoint = buffer.endIndex - 1
@@ -224,7 +224,7 @@ extension UInt {
     /// Formats `self` in "Numeric string" format (https://speleotrove.com/decimal/daconvs.html) which is the required input form for certain ICU functions (e.g. `unum_formatDecimal`).
     ///
     /// This specialisation (for UInt) is faster than the generic BinaryIntegers implementation (earlier in this file).  It is used as an opportunistic fast-path in the generic implementation, for any values that happen to fit into a UInt.
-    internal var numericStringRepresentation000: ArraySlice<UInt8> {
+    @inlinable var numericStringRepresentation000X: ArraySlice<UInt8> {
         // This property's type is an ArraySlice rather than a straight ContiguousArray because it's computationally more expensive to size the array exactly right (whether by pre-calculating the required size more precisely, or by dynamically resizing it during execution of the iterative algorithm).  Since this is intended to only be a transient value, for the purposes of translating from BinaryInteger to the ICU libraries, this is the right compromise of runtime speed (CPU time) and memory efficiency (usually just one excess byte, if any).
 
         // It's easier to just special-case zero than handle it in the main algorithm.
@@ -232,11 +232,11 @@ extension UInt {
             return [UInt8(ascii: "0")]
         }
 
-        let maximumDigits = Self.maximumDecimalDigitsForUnsigned000(bitWidth: self.magnitudeBitWidth000)
+        let maximumDigits = Self.maximumDecimalDigitsForUnsigned000X(bitWidth: self.magnitudeBitWidth000X)
         var actualDigits: Int = Int.min // Actually initialised inside the closure below, but the compiler mistakenly demands a default value anyway.
 
         return ContiguousArray(unsafeUninitializedCapacity: maximumDigits) { buffer, initialisedCount in
-            actualDigits = numericStringRepresentation000(intoEndOfBuffer: &buffer[...])
+            actualDigits = numericStringRepresentation000X(intoEndOfBuffer: &buffer[...])
 
             let unusedDigits = maximumDigits - actualDigits
             assert(0 <= unusedDigits, "Negative unused digits \(unusedDigits)!  Expected at most \(maximumDigits) digit(s) but emitted \(actualDigits).")

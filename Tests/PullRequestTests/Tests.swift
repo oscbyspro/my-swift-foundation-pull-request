@@ -93,6 +93,88 @@ final class Tests: XCTestCase {
     }
     
     //=------------------------------------------------------------------------=
+    // MARK: Tests x Foundation x 000X
+    //=------------------------------------------------------------------------=
+    
+    func test_PlusMinus1_Int_Foundation_000X() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000X)
+            blackHole(y.numericStringRepresentation000X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Foundation_000X() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000X)
+            blackHole(y.numericStringRepresentation000X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int_Foundation_000X() {
+        var x = blackHoleIdentity(Int.min)
+        var y = blackHoleIdentity(Int.max)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000X)
+            blackHole(y.numericStringRepresentation000X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt_Foundation_000X() {
+        var x = blackHoleIdentity(UInt.max / 2 + 1)
+        var y = blackHoleIdentity(UInt.max / 2 + 0)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000X)
+            blackHole(y.numericStringRepresentation000X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int256_Foundation_000X() {
+        var x = blackHoleIdentity(Int256.min)
+        var y = blackHoleIdentity(Int256.max)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000X)
+            blackHole(y.numericStringRepresentation000X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt256_Foundation_000X() {
+        var x = blackHoleIdentity(UInt256.max / 2 + 1)
+        var y = blackHoleIdentity(UInt256.max / 2 + 0)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation000X)
+            blackHole(y.numericStringRepresentation000X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    //=------------------------------------------------------------------------=
     // MARK: Tests x Foundation x 001
     //=------------------------------------------------------------------------=
     
@@ -175,81 +257,81 @@ final class Tests: XCTestCase {
     }
     
     //=------------------------------------------------------------------------=
-    // MARK: Tests x Foundation x 002
+    // MARK: Tests x Foundation x 001X
     //=------------------------------------------------------------------------=
     
-    func test_PlusMinus1_Int_Foundation_002() {
+    func test_PlusMinus1_Int_Foundation_001X() {
         var x = blackHoleIdentity(Int(-1))
         var y = blackHoleIdentity(Int( 1))
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.numericStringRepresentation002)
-            blackHole(y.numericStringRepresentation002)
+            blackHole(x.numericStringRepresentation001X)
+            blackHole(y.numericStringRepresentation001X)
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
     }
     
-    func test_Plus1_UInt_Foundation_002() {
+    func test_Plus1_UInt_Foundation_001X() {
         var x = blackHoleIdentity(UInt(1))
         var y = blackHoleIdentity(UInt(1))
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.numericStringRepresentation002)
-            blackHole(y.numericStringRepresentation002)
+            blackHole(x.numericStringRepresentation001X)
+            blackHole(y.numericStringRepresentation001X)
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
     }
     
-    func test_Int_Foundation_002() {
+    func test_Int_Foundation_001X() {
         var x = blackHoleIdentity(Int.min)
         var y = blackHoleIdentity(Int.max)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.numericStringRepresentation002)
-            blackHole(y.numericStringRepresentation002)
+            blackHole(x.numericStringRepresentation001X)
+            blackHole(y.numericStringRepresentation001X)
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
     }
     
-    func test_UInt_Foundation_002() {
+    func test_UInt_Foundation_001X() {
         var x = blackHoleIdentity(UInt.max / 2 + 1)
         var y = blackHoleIdentity(UInt.max / 2 + 0)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.numericStringRepresentation002)
-            blackHole(y.numericStringRepresentation002)
+            blackHole(x.numericStringRepresentation001X)
+            blackHole(y.numericStringRepresentation001X)
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
     }
     
-    func test_Int256_Foundation_002() {
+    func test_Int256_Foundation_001X() {
         var x = blackHoleIdentity(Int256.min)
         var y = blackHoleIdentity(Int256.max)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.numericStringRepresentation002)
-            blackHole(y.numericStringRepresentation002)
+            blackHole(x.numericStringRepresentation001X)
+            blackHole(y.numericStringRepresentation001X)
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
     }
     
-    func test_UInt256_Foundation_002() {
+    func test_UInt256_Foundation_001X() {
         var x = blackHoleIdentity(UInt256.max / 2 + 1)
         var y = blackHoleIdentity(UInt256.max / 2 + 0)
         
         for _ in 0 ..< 1_000_000 {
-            blackHole(x.numericStringRepresentation002)
-            blackHole(y.numericStringRepresentation002)
+            blackHole(x.numericStringRepresentation001X)
+            blackHole(y.numericStringRepresentation001X)
             
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
