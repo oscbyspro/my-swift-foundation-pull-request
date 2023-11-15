@@ -24,7 +24,7 @@ extension BinaryInteger {
 ///   - words: The binary integer's words.
 ///   - isSigned: The binary integer's signedness.
 ///
-internal // In order to test big integers without big integer models.
+public // In order to test big integers without big integer models.
 func numericStringRepresentationForBinaryInteger001(
 words: some Collection<UInt>, isSigned: Bool) -> ArraySlice<UInt8> {
     // Copies the words and then passes them to a non-generic, mutating, word-based algorithm.
