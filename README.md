@@ -15,8 +15,8 @@ I have published a small [package][PRP] with some [benchmarks][PRT].
 - `v0x`: the `old` version + `@inlinable`
 - `v1 `: the `1st` version
 - `v1x`: the `1st` version + `@inlinable` (2x) + `@usableFromInline` (1x)
-- `v2 `: the `2nd` version + `String`
-- `v2x`: the `2nd` version + `String` + `@inlinable` (2x) + `@usableFromInline` (1x)
+- `v2 `: the `2nd` version
+- `v2x`: the `2nd` version + `@inlinable` (2x) + `@usableFromInline` (1x)
 
 #### The results on MacBook Pro (13-inch, M1, 2020), Xcode 15.0.1, in seconds
 
