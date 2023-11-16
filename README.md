@@ -13,19 +13,21 @@ I have published a small [package][PRP] with some [benchmarks][PRT].
 
 - `v0 `: the `old` version
 - `v0x`: the `old` version + `@inlinable`
-- `v1 `: the `new` version
-- `v1x`: the `new` version + `@inlinable` (2x) + `@usableFromInline` (1x)
+- `v1 `: the `1st` version
+- `v1x`: the `1st` version + `@inlinable` (2x) + `@usableFromInline` (1x)
+- `v2 `: the `2nd` version + `String`
+- `v2x`: the `2nd` version + `String` + `@inlinable` (2x) + `@usableFromInline` (1x)
 
 #### The results on MacBook Pro (13-inch, M1, 2020), Xcode 15.0.1, in seconds
 
-|          | v0     | v0x   | v1    | v1x   | [Numberick][NBK] | Stdlib  |
-|---------:|-------:|------:|------:|------:|-----------------:|--------:|
-| Int      |  1.528 | 0.188 | 0.271 | 0.169 | 0.167            |   0.169 |
-| UInt     |  0.226 | 0.199 | 0.257 | 0.161 | 0.163            |   0.164 |
-| Int256   | 36.575 | 0.618 | 0.772 | 0.423 | 0.422            |  86.736 |
-| UInt256  | 29.418 | 0.571 | 0.728 | 0.408 | 0.419            |  85.649 |
-| Int(±1)  |  1.408 | 0.154 | 0.255 | 0.156 | 0.061            |   0.062 |
-| UInt(1)  |  0.208 | 0.166 | 0.242 | 0.146 | 0.062            |   0.062 |
+|          | v0     | v0x   | v1    | v1x   | v2    | v2x   | [Numberick][NBK] | Stdlib  |
+|---------:|-------:|------:|------:|------:|------:|------:|-----------------:|--------:|
+| Int      |  1.501 | 0.181 | 0.248 | 0.169 | 0.216 | 0.135 | 0.167            |   0.169 |
+| UInt     |  0.226 | 0.191 | 0.238 | 0.158 | 0.213 | 0.133 | 0.163            |   0.163 |
+| Int256   | 35.541 | 0.620 | 0.737 | 0.420 | 0.714 | 0.410 | 0.423            |  85.640 |
+| UInt256  | 29.107 | 0.569 | 0.684 | 0.409 | 0.676 | 0.399 | 0.419            |  84.488 |
+| Int(±1)  |  1.403 | 0.151 | 0.234 | 0.155 | 0.122 | 0.043 | 0.060            |   0.060 |
+| UInt(1)  |  0.189 | 0.156 | 0.222 | 0.143 | 0.119 | 0.039 | 0.060            |   0.060 |
 
 [PRP]: https://github.com/oscbyspro/my-swift-foundation-pull-request
 [PRT]: https://github.com/oscbyspro/my-swift-foundation-pull-request/blob/main/Tests/PullRequestTests/Tests.swift

@@ -339,6 +339,170 @@ final class Tests: XCTestCase {
     }
     
     //=------------------------------------------------------------------------=
+    // MARK: Tests x Foundation x 002
+    //=------------------------------------------------------------------------=
+    
+    func test_PlusMinus1_Int_Foundation_002() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Foundation_002() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int_Foundation_002() {
+        var x = blackHoleIdentity(Int.min)
+        var y = blackHoleIdentity(Int.max)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt_Foundation_002() {
+        var x = blackHoleIdentity(UInt.max / 2 + 1)
+        var y = blackHoleIdentity(UInt.max / 2 + 0)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int256_Foundation_002() {
+        var x = blackHoleIdentity(Int256.min)
+        var y = blackHoleIdentity(Int256.max)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt256_Foundation_002() {
+        var x = blackHoleIdentity(UInt256.max / 2 + 1)
+        var y = blackHoleIdentity(UInt256.max / 2 + 0)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002)
+            blackHole(y.numericStringRepresentation002)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    //=------------------------------------------------------------------------=
+    // MARK: Tests x Foundation x 002X
+    //=------------------------------------------------------------------------=
+    
+    func test_PlusMinus1_Int_Foundation_002X() {
+        var x = blackHoleIdentity(Int(-1))
+        var y = blackHoleIdentity(Int( 1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002X)
+            blackHole(y.numericStringRepresentation002X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Plus1_UInt_Foundation_002X() {
+        var x = blackHoleIdentity(UInt(1))
+        var y = blackHoleIdentity(UInt(1))
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002X)
+            blackHole(y.numericStringRepresentation002X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int_Foundation_002X() {
+        var x = blackHoleIdentity(Int.min)
+        var y = blackHoleIdentity(Int.max)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002X)
+            blackHole(y.numericStringRepresentation002X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt_Foundation_002X() {
+        var x = blackHoleIdentity(UInt.max / 2 + 1)
+        var y = blackHoleIdentity(UInt.max / 2 + 0)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002X)
+            blackHole(y.numericStringRepresentation002X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_Int256_Foundation_002X() {
+        var x = blackHoleIdentity(Int256.min)
+        var y = blackHoleIdentity(Int256.max)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002X)
+            blackHole(y.numericStringRepresentation002X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    func test_UInt256_Foundation_002X() {
+        var x = blackHoleIdentity(UInt256.max / 2 + 1)
+        var y = blackHoleIdentity(UInt256.max / 2 + 0)
+        
+        for _ in 0 ..< 1_000_000 {
+            blackHole(x.numericStringRepresentation002X)
+            blackHole(y.numericStringRepresentation002X)
+            
+            blackHoleInoutIdentity(&x)
+            blackHoleInoutIdentity(&y)
+        }
+    }
+    
+    //=------------------------------------------------------------------------=
     // MARK: Tests x Numberick
     //=------------------------------------------------------------------------=
         

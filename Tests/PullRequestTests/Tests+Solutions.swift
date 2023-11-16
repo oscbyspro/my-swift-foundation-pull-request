@@ -114,10 +114,12 @@ final class TestsOnSolutions: XCTestCase {
     //=------------------------------------------------------------------------=
     
     func check(_ integer: some BinaryInteger, expectation: String, file: StaticString = #file, line: UInt = #line) {
-        check(ascii: integer.numericStringRepresentation000,  expectation: expectation, file: file, line: line)
-        check(ascii: integer.numericStringRepresentation000X, expectation: expectation, file: file, line: line)
-        check(ascii: integer.numericStringRepresentation001,  expectation: expectation, file: file, line: line)
-        check(ascii: integer.numericStringRepresentation001X, expectation: expectation, file: file, line: line)
+        check(ascii: integer.numericStringRepresentation000,       expectation: expectation, file: file, line: line)
+        check(ascii: integer.numericStringRepresentation000X,      expectation: expectation, file: file, line: line)
+        check(ascii: integer.numericStringRepresentation001,       expectation: expectation, file: file, line: line)
+        check(ascii: integer.numericStringRepresentation001X,      expectation: expectation, file: file, line: line)
+        check(ascii: integer.numericStringRepresentation002 .utf8, expectation: expectation, file: file, line: line)
+        check(ascii: integer.numericStringRepresentation002X.utf8, expectation: expectation, file: file, line: line)
     }
     
     func check(x64: [UInt64], isSigned: Bool, expectation: String, file: StaticString = #file, line: UInt = #line) {
@@ -125,8 +127,10 @@ final class TestsOnSolutions: XCTestCase {
     }
     
     func check(words: [UInt], isSigned: Bool, expectation: String, file: StaticString = #file, line: UInt = #line) {
-        check(ascii: numericStringRepresentationForBinaryInteger001 (words: words, isSigned: isSigned), expectation: expectation, file: file, line: line)
-        check(ascii: numericStringRepresentationForBinaryInteger001X(words: words, isSigned: isSigned), expectation: expectation, file: file, line: line)
+        check(ascii: numericStringRepresentationForBinaryInteger001 (words: words, isSigned: isSigned),      expectation: expectation, file: file, line: line)
+        check(ascii: numericStringRepresentationForBinaryInteger001X(words: words, isSigned: isSigned),      expectation: expectation, file: file, line: line)
+        check(ascii: numericStringRepresentationForBinaryInteger002 (words: words, isSigned: isSigned).utf8, expectation: expectation, file: file, line: line)
+        check(ascii: numericStringRepresentationForBinaryInteger002X(words: words, isSigned: isSigned).utf8, expectation: expectation, file: file, line: line)
     }
     
     func check(ascii: some Collection<UInt8>, expectation: String, file: StaticString = #file, line: UInt = #line) {
