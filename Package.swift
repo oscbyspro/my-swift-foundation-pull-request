@@ -17,7 +17,7 @@ let package = Package(
         targets: ["PullRequest"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/oscbyspro/Numberick", exact: "0.15.0"),
+        .package(url: "https://github.com/oscbyspro/Numberick", revision: "a2fdb8105e6f8f1167c98ad7470a80b70d694b82"),
     ],
     targets: [
         .target(

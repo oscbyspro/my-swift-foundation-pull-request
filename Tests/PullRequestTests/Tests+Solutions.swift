@@ -88,8 +88,8 @@ final class TestsOnSolutions: XCTestCase {
     //=------------------------------------------------------------------------=
     
     func testWordsIsEmptyResultsInZero() {
-        check(words:[              ] as [UInt], isSigned: true,  expectation: "0")
-        check(words:[              ] as [UInt], isSigned: false, expectation: "0")
+        check(words:[              ] as [UInt], isSigned: true,  expectation:  "0")
+        check(words:[              ] as [UInt], isSigned: false, expectation:  "0")
     }
     
     func testSignExtendingDoesNotChangeTheResult() {

@@ -11,6 +11,20 @@ import XCTest
 final class Tests: XCTestCase {
     
     //=------------------------------------------------------------------------=
+    // MARK: State
+    //=------------------------------------------------------------------------=
+    
+    private static let fibonacci = blackHoleIdentity(NBKFibonacciXL(1_000_000).element)
+    
+    //=------------------------------------------------------------------------=
+    // MARK: Setup
+    //=------------------------------------------------------------------------=
+    
+    override class func setUp() {
+        _ = Self.fibonacci
+    }
+    
+    //=------------------------------------------------------------------------=
     // MARK: Tests x Foundation x 000
     //=------------------------------------------------------------------------=
     
@@ -90,6 +104,10 @@ final class Tests: XCTestCase {
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
+    }
+    
+    func test_UIntXL_Foundation_000() {
+        blackHole(Self.fibonacci.numericStringRepresentation000)
     }
     
     //=------------------------------------------------------------------------=
@@ -174,6 +192,10 @@ final class Tests: XCTestCase {
         }
     }
     
+    func test_UIntXL_Foundation_000X() {
+        blackHole(Self.fibonacci.numericStringRepresentation000X)
+    }
+    
     //=------------------------------------------------------------------------=
     // MARK: Tests x Foundation x 001
     //=------------------------------------------------------------------------=
@@ -254,6 +276,10 @@ final class Tests: XCTestCase {
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
+    }
+    
+    func test_UIntXL_Foundation_001() {
+        blackHole(Self.fibonacci.numericStringRepresentation001)
     }
     
     //=------------------------------------------------------------------------=
@@ -338,6 +364,10 @@ final class Tests: XCTestCase {
         }
     }
     
+    func test_UIntXL_Foundation_001X() {
+        blackHole(Self.fibonacci.numericStringRepresentation001X)
+    }
+    
     //=------------------------------------------------------------------------=
     // MARK: Tests x Foundation x 002
     //=------------------------------------------------------------------------=
@@ -418,6 +448,10 @@ final class Tests: XCTestCase {
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
+    }
+    
+    func test_UIntXL_Foundation_002() {
+        blackHole(Self.fibonacci.numericStringRepresentation002)
     }
     
     //=------------------------------------------------------------------------=
@@ -502,6 +536,10 @@ final class Tests: XCTestCase {
         }
     }
     
+    func test_UIntXL_Foundation_002X() {
+        blackHole(Self.fibonacci.numericStringRepresentation002X)
+    }
+    
     //=------------------------------------------------------------------------=
     // MARK: Tests x Numberick
     //=------------------------------------------------------------------------=
@@ -584,6 +622,10 @@ final class Tests: XCTestCase {
         }
     }
     
+    func test_UIntXL_Numberick() {
+        blackHole(String(Self.fibonacci, radix: 10))
+    }
+    
     //=------------------------------------------------------------------------=
     // MARK: Tests x Stdlib
     //=------------------------------------------------------------------------=
@@ -664,6 +706,10 @@ final class Tests: XCTestCase {
             blackHoleInoutIdentity(&x)
             blackHoleInoutIdentity(&y)
         }
+    }
+    
+    func test_UIntXL_Stdlib() {
+        blackHole(String(someSwiftBinaryInteger(Self.fibonacci), radix: 10))
     }
 }
 
