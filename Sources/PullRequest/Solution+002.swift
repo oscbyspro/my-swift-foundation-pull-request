@@ -57,7 +57,6 @@ private func numericStringRepresentationForMutableBinaryInteger002(words: Unsafe
     
     let capacity = maxDecimalDigitCountForUnsignedInteger002(bitWidth: words.count * UInt.bitWidth) + (isLessThanZero ? 1 : 0)
     return withUnsafeTemporaryAllocation(of: UInt8.self, capacity: capacity) {
-        // Note that capacity <= $0.count.
         let ascii = UnsafeMutableBufferPointer(start: $0.baseAddress!, count: capacity)
         // Set initial ASCII zeros, see later steps.
         ascii.initialize(repeating: UInt8(ascii: "0"))
@@ -76,20 +75,21 @@ private func numericStringRepresentationForMutableBinaryInteger002(words: Unsafe
         
         dividing: while true {
             // Mutating division prevents unnecessary big integer allocations.
-            var remainder = formQuotientWithRemainderForUnsignedInteger002(words: words[..<wordsIndex], dividingBy: radix.power)
+            var chunk = formQuotientWithRemainderForUnsignedInteger002(words: words[..<wordsIndex], dividingBy: radix.power)
             // Trims the quotient's most significant zeros for flexible-width performance and to end the loop.
             wordsIndex = words[..<wordsIndex].reversed().drop(while:{ $0 == .zero }).startIndex.base
             // This loop writes the remainder's decimal digits to the buffer. Note that remainder < radix.power.
             repeat {
                 
-                let digit: UInt; (remainder, digit) = remainder.quotientAndRemainder(dividingBy: 10)
-                assert(writeIndex > ascii.startIndex, "the buffer must accomodate the magnitude's decimal digits")
+                let digit: UInt
+                (chunk,digit) = chunk.quotientAndRemainder(dividingBy: 10)
+                assert(writeIndex > ascii.startIndex, "the buffer must accommodate the magnitude's decimal digits")
                 ascii.formIndex(before: &writeIndex)
                 ascii[writeIndex] = UInt8(ascii: "0") &+ UInt8(truncatingIfNeeded: digit)
                 
-            } while remainder != .zero
-            // We break the loop when every decimal digit has been extracted.
-            guard wordsIndex != words.startIndex else { break }
+            } while chunk != .zero
+            // We break the loop when every decimal digit has been encoded.
+            if wordsIndex == words.startIndex { break }
             // The resulting index is always in bounds because we form it after checking if there are digits left.
             chunkIndex = ascii.index(chunkIndex, offsetBy: -radix.exponent)
             // Set the next iterations's index in case this one ended in zeros. Note that zeros are pre-initialized.
