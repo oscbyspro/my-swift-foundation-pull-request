@@ -65,20 +65,20 @@ private func numericStringRepresentationForMutableBinaryInteger002(words: Unsafe
             ascii.deinitialize()
         }
         
-        var chunkIndex = ascii.endIndex // The index marking the position of each loop's remainder.
-        var writeIndex = ascii.endIndex // The index of the most significant digit encoded.
-        var wordsIndex = words.endIndex // The index one past the most significant nonzero element.
-        
         // We get decimal digits in chunks as we divide the magnitude by pow(10,radix.exponent).
         // We then extract the decimal digits from each chunk by repeatedly dividing them by 10.
         let radix: (exponent: Int, power: UInt) = maxDecimalExponentAndPowerForUnsignedIntegerWord002()
+        
+        var chunkIndex = ascii.endIndex // The index marking the position of the iteration's chunk.
+        var writeIndex = ascii.endIndex // The index of the most significant digit encoded.
+        var wordsIndex = words.endIndex // The index one past the most significant nonzero element.
         
         dividing: while true {
             // Mutating division prevents unnecessary big integer allocations.
             var chunk = formQuotientWithRemainderForUnsignedInteger002(words: words[..<wordsIndex], dividingBy: radix.power)
             // Trims the quotient's most significant zeros for flexible-width performance and to end the loop.
             wordsIndex = words[..<wordsIndex].reversed().drop(while:{ $0 == .zero }).startIndex.base
-            // This loop writes the remainder's decimal digits to the buffer. Note that remainder < radix.power.
+            // This loop writes the chunk's decimal digits to the buffer. Note that chunk < radix.power.
             repeat {
                 
                 let digit: UInt
