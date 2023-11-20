@@ -21,8 +21,8 @@ extension BinaryInteger {
 /// which is the required input form for certain ICU functions (e.g. `unum_formatDecimal`).
 ///
 /// - Parameters:
-///   - words: The binary integer's words.
-///   - isSigned: The binary integer's signedness.
+///   - words: The binary integer's words (least-significant word first).
+///   - isSigned: The binary integer's signedness.  If true, `words` must be in two's complement form.
 ///
 @inlinable public func numericStringRepresentationForBinaryInteger002X(words: some Collection<UInt>, isSigned: Bool) -> String {
     // Copies the words and then passes them to a non-generic, mutating, word-based algorithm.
@@ -172,7 +172,7 @@ private func formTwosComplementForBinaryInteger002X(words: UnsafeMutableBufferPo
 /// Forms the `quotient` of dividing the `dividend` by the `divisor`, then returns the `remainder`.
 ///
 /// - Parameters:
-///   - dividend: An unsigned binary integer's words.
+///   - dividend: An unsigned binary integer's words. It becomes the `quotient` once this function returns.
 ///   - divisor:  An unsigned binary integer's only word.
 ///
 /// - Returns: The `remainder`, which is a value in the range of `0 ..< divisor`.
